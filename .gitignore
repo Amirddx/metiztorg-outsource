@@ -1,5 +1,6 @@
 
-/assets/images/*
+
+/assets/videos/*
 !.gitkeep
 *.log
 *.bak
