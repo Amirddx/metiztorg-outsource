@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,7 +13,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        
+
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;700;900&display=swap" rel="stylesheet">
 
         <link href="assets/css/bootstrap.min.css" rel="stylesheet">
@@ -27,9 +27,9 @@
 
 
     </head>
-    
+
     <body>
-    
+
         <main>
 
             <section class="hero" id="hero">
@@ -54,53 +54,7 @@
                 <div class="overlay"></div>
             </section>
 
-            <nav class="navbar navbar-expand-lg bg-light shadow-lg">
-                <div class="container">
-                    <a class="navbar-brand d-flex align-items-center" href="index.html">
-                        <img src="assets/fonts/icons8-аутентификация-48.png" alt="Логотип" style="height: 44px; width: auto; vertical-align: middle; margin-right: 8px;">
-                        <strong style="font-size: 1.5rem;">Метизторг</strong>
-                    </a>
-
-
-
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav mx-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#hero">Главная</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="#about">  О нас</a>
-                            </li>
-
-
-
-
-
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Открытые вакансии</a>
-                            </li>
-
-
-<!--                            пока не решил-->
-<!--                            <li class="nav-item">-->
-<!--                                <a class="nav-link" href="#news">Новости и События</a>-->
-<!--                            </li>-->
-
-
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="#contact">Свяжитесь с нами</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+            <?php include __DIR__ .'/includes/navbar.php'; ?>
 
             <section class="section-padding pb-0" id="about">
                 <div class="container mb-5 pb-lg-5">
@@ -130,7 +84,7 @@
 
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-lg-3 col-12 p-0">      
+                        <div class="col-lg-3 col-12 p-0">
                             <img src="assets/images/курьер_3.jpg" class="img-fluid about-image" alt="">
                         </div>
 
@@ -220,6 +174,8 @@
 
 
 
+
+<!--            Несколько фоток с описаниями(можно пользоваться, работает)-->
 <!--            <section class="section-padding" id="portfolio">-->
 <!--                <div class="container">-->
 <!--                    <div class="row">-->
@@ -230,54 +186,54 @@
 
 <!--                        <div class="col-lg-6 col-12">-->
 <!--                            <div class="portfolio-thumb mb-5" data-aos="fade-up">-->
-<!--                                <a href="images/portfolio/visuals-Y4qzW3AsvqI-unsplash.jpeg" class="image-popup">-->
-<!--                                    <img src="images/portfolio/visuals-Y4qzW3AsvqI-unsplash.jpeg" class="img-fluid portfolio-image" alt="">-->
+<!--                                <a href="assets/images/portfolio/visuals-Y4qzW3AsvqI-unsplash.jpeg" class="image-popup">-->
+<!--                                    <img src="assets/images/portfolio/visuals-Y4qzW3AsvqI-unsplash.jpeg" class="img-fluid portfolio-image" alt="">-->
 <!--                                </a>-->
 
-<!--                                <div class="portfolio-info">                     -->
+<!--                                <div class="portfolio-info">-->
 <!--                                    <h4 class="portfolio-title mb-0">Effortless</h4>-->
 
 <!--                                    <p class="text-danger">Branding</p>-->
 <!--                                </div>-->
-<!--                            </div> -->
+<!--                            </div>-->
 
 <!--                            <div class="portfolio-thumb" data-aos="fade-up">-->
-<!--                                <a href="images/portfolio/severin-candrian-nn3uIZqmUtE-unsplash.jpeg" class="image-popup">-->
-<!--                                    <img src="images/portfolio/severin-candrian-nn3uIZqmUtE-unsplash.jpeg" class="img-fluid portfolio-image" alt="">-->
+<!--                                <a href="assets/images/portfolio/severin-candrian-nn3uIZqmUtE-unsplash.jpeg" class="image-popup">-->
+<!--                                    <img src="assets/images/portfolio/severin-candrian-nn3uIZqmUtE-unsplash.jpeg" class="img-fluid portfolio-image" alt="">-->
 <!--                                </a>-->
 
-<!--                                <div class="portfolio-info">                     -->
+<!--                                <div class="portfolio-info">-->
 <!--                                    <h4 class="portfolio-title mb-0">Health technology</h4>-->
 
 <!--                                    <p class="text-success">Art Direction</p>-->
 <!--                                </div>-->
-<!--                            </div> -->
+<!--                            </div>-->
 <!--                        </div>-->
 
 <!--                        <div class="col-lg-6 col-12">-->
 <!--                            <div class="portfolio-thumb mt-5 mt-lg-0 mb-5" data-aos="fade-up">-->
-<!--                                <a href="images/portfolio/tyler-nix-Y1drF0Y3Oe0-unsplash.jpeg" class="image-popup">-->
-<!--                                    <img src="images/portfolio/tyler-nix-Y1drF0Y3Oe0-unsplash.jpeg" class="img-fluid portfolio-image" alt="">-->
+<!--                                <a href="assets/images/portfolio/tyler-nix-Y1drF0Y3Oe0-unsplash.jpeg" class="image-popup">-->
+<!--                                    <img src="assets/images/portfolio/tyler-nix-Y1drF0Y3Oe0-unsplash.jpeg" class="img-fluid portfolio-image" alt="">-->
 <!--                                </a>-->
 
-<!--                                <div class="portfolio-info">                     -->
+<!--                                <div class="portfolio-info">-->
 <!--                                    <h4 class="portfolio-title mb-0">Maki</h4>-->
 
 <!--                                    <p class="text-warning">Website</p>-->
 <!--                                </div>-->
-<!--                            </div> -->
+<!--                            </div>-->
 
 <!--                            <div class="portfolio-thumb" data-aos="fade-up">-->
-<!--                                <a href="images/portfolio/thought-catalog-gv-T-OjLe4c-unsplash.jpeg" class="image-popup">-->
-<!--                                    <img src="images/portfolio/thought-catalog-gv-T-OjLe4c-unsplash.jpeg" class="img-fluid portfolio-image" alt="">-->
+<!--                                <a href="assets/images/portfolio/thought-catalog-gv-T-OjLe4c-unsplash.jpeg" class="image-popup">-->
+<!--                                    <img src="assets/images/portfolio/thought-catalog-gv-T-OjLe4c-unsplash.jpeg" class="img-fluid portfolio-image" alt="">-->
 <!--                                </a>-->
 
-<!--                                <div class="portfolio-info">                     -->
+<!--                                <div class="portfolio-info">-->
 <!--                                    <h4 class="portfolio-title mb-0">The gig economy</h4>-->
 
 <!--                                    <p class="text-info">Graphic</p>-->
 <!--                                </div>-->
-<!--                            </div> -->
+<!--                            </div>-->
 <!--                        </div>-->
 
 <!--                    </div>-->
@@ -286,7 +242,7 @@
 
 
 
-<!--            Пока не решил-->
+<!--            Новости-->
 
 <!--            <section class="news section-padding" id="news">-->
 <!--                <div class="container">-->
@@ -299,11 +255,11 @@
 <!--                        <div class="col-lg-6 col-12 mb-5 mb-lg-0">-->
 <!--                            <div class="news-thumb" data-aos="fade-up">-->
 <!--                                <a href="news-detail.html" class="news-image-hover news-image-hover-warning">-->
-<!--                                    <img src="images/news/caroline-lm-uqveD8dYPUM-unsplash.jpg" class="img-fluid large-news-image news-image" alt="">-->
+<!--                                    <img src="assets/images/news/caroline-lm-uqveD8dYPUM-unsplash.jpg" class="img-fluid large-news-image news-image" alt="">-->
 <!--                                </a>-->
 
 <!--                                <div class="news-category bg-warning text-white">News</div>-->
-<!--                                -->
+
 <!--                                <div class="news-text-info">-->
 <!--                                    <h5 class="news-title">-->
 <!--                                        <a href="news-detail.html" class="news-title-link">The rise of the gig economy spells the end for these workers the old system</a>-->
@@ -311,20 +267,20 @@
 
 <!--                                    <span class="text-muted">22 hours ago</span>-->
 <!--                                </div>-->
-<!--                            </div> -->
+<!--                            </div>-->
 <!--                        </div>-->
 
 <!--                        <div class="col-lg-6 col-12">-->
 <!--                            <div class="news-thumb news-two-column d-flex flex-column flex-lg-row" data-aos="fade-up">-->
 <!--                                <div class="news-top w-100">-->
-<!--                                    -->
+
 <!--                                    <a href="news-detail.html" class="news-image-hover news-image-hover-primary">-->
-<!--                                        <img src="images/news/jean-philippe-delberghe-MmanXAs1sKw-unsplash.jpeg" class="img-fluid news-image" alt="">-->
+<!--                                        <img src="assets/images/news/jean-philippe-delberghe-MmanXAs1sKw-unsplash.jpeg" class="img-fluid news-image" alt="">-->
 <!--                                    </a>-->
 
 <!--                                    <div class="news-category bg-primary text-white">Events</div>-->
 <!--                                </div>-->
-<!--                                -->
+
 <!--                                <div class="news-bottom w-100">-->
 <!--                                    <div class="news-text-info">-->
 <!--                                        <h5 class="news-title">-->
@@ -341,18 +297,18 @@
 <!--                                        </div>-->
 <!--                                    </div>-->
 <!--                                </div>-->
-<!--                            </div> -->
+<!--                            </div>-->
 
 <!--                            <div class="news-thumb news-two-column d-flex flex-column flex-lg-row" data-aos="fade-up">-->
 <!--                                <div class="news-top w-100" data-aos="fade-up">-->
-<!--                                    -->
+
 <!--                                    <a href="news-detail.html" class="news-image-hover news-image-hover-success">-->
-<!--                                        <img src="images/news/maria-stewart-p4tj0g-_aMM-unsplash.jpeg" class="img-fluid news-image" alt="">-->
+<!--                                        <img src="assets/images/news/maria-stewart-p4tj0g-_aMM-unsplash.jpeg" class="img-fluid news-image" alt="">-->
 <!--                                    </a>-->
 
 <!--                                    <div class="news-category bg-success text-white">News</div>-->
 <!--                                </div>-->
-<!--                                -->
+
 <!--                                <div class="news-bottom w-100">-->
 <!--                                    <div class="news-text-info">-->
 <!--                                        <h5 class="news-title">-->
@@ -362,7 +318,7 @@
 <!--                                        <span class="text-muted">6 days ago</span>-->
 <!--                                    </div>-->
 <!--                                </div>-->
-<!--                            </div> -->
+<!--                            </div>-->
 <!--                        </div>-->
 
 <!--                    </div>-->
@@ -372,7 +328,7 @@
             <section class=" contact section-padding" id="contact">
                 <div class="container">
                     <div class="row">
-                        
+
                         <div class="col-lg-7 col-12 mx-auto">
 
                             <h2 class="mb-4 text-center" data-aos="fade-up">Свяжитесь с нами, мы всегда на связи</h2>
@@ -380,7 +336,7 @@
                             <form action="#" method="post" class="contact-form" role="form" data-aos="fade-up">
 
                                 <div class="row">
-                                    
+
                                     <div class="col-lg-6 col-6">
                                         <label for="name" class="form-label">Имя <sup class="text-danger">*</sup></label>
 
@@ -397,8 +353,13 @@
                                         <label for="message" class="form-label">Как мы можем помочь?</label>
 
                                         <textarea name="message" rows="6" class="form-control" id="message" placeholder="Напишите что нибудь..." required></textarea>
-                                        
+
                                     </div>
+
+
+
+
+<!--                                    Сервисы -->
 
 <!--                                    <div class="col-12">-->
 <!--                                        <label for="services" class="form-label">Services<sup class="text-danger">*</sup></label>-->
@@ -439,48 +400,11 @@
                 </div>
             </section>
 
-            <section class="google-map">
-<!--                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d511641.7533989826!2d29.43536044943815!3d59.938769378852946!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4696378cc74a65ed%3A0x6dc7673fab848eff!2z0KHQsNC90LrRgi3Qn9C10YLQtdGA0LHRg9GA0LM!5e0!3m2!1sru!2sru!4v1737911739711!5m2!1sru!2sru" class="map-iframe" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>-->
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1998.2302579191467!2d30.343507292992054!3d59.94491401024706!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4696317504834861%3A0x8e73fccb2251c7c2!2z0JvQuNGC0LXQudC90YvQuSDQv9GALiwgMTMsINCh0LDQvdC60YIt0J_QtdGC0LXRgNCx0YPRgNCzLCAxOTExODc!5e0!3m2!1sru!2sru!4v1737912307981!5m2!1sru!2sru" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </section>
+           <?php include __DIR__.'/includes/maps.php'?>
 
         </main>
 
-        <footer class="site-footer bg-dark text-white py-5">
-            <div class="container">
-                <div class="row justify-content-between align-items-center">
-                    <!-- Контактная информация -->
-                    <div class="col-lg-4 col-md-6 mb-4">
-                        <h5 class="text-white">
-                            <i class="bi-geo-alt-fill me-2"></i>
-                            Санкт-Петербург, Россия
-                        </h5>
-                        <a href="mailto:info@metiztorg.com" class="custom-link text-warning">
-                            info@metiztorg.com
-                        </a>
-                        <p class="mt-3 mb-0">Мы всегда на связи, пишите нам в любое время!</p>
-                    </div>
-
-                    <!-- Социальные сети -->
-                    <div class="col-lg-4 col-md-6 mb-4 text-center">
-                        <p class="text-end text-center">Мы в социальных сетях</p>
-                        <ul class="social-icon list-unstyled d-flex justify-content-center">
-                            <li><a href="#" class="social-icon-link bi-facebook mx-2"></a></li>
-                            <li><a href="#" class="social-icon-link bi-twitter mx-2"></a></li>
-                            <li><a href="#" class="social-icon-link bi-whatsapp mx-2"></a></li>
-                            <li><a href="#" class="social-icon-link bi-instagram mx-2"></a></li>
-                            <li><a href="#" class="social-icon-link bi-youtube mx-2"></a></li>
-                        </ul>
-                    </div>
-
-                    <!-- Копирайт -->
-                    <div class="col-lg-4 col-12 text-end">
-                        <p class="mb-0">© Метизторг 2025</p>
-                        <p class="mb-0">Все права защищены.</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <?php include __DIR__ .'/includes/footer.php'; ?>
 
 
 
