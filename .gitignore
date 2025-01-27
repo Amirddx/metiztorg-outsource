@@ -1,0 +1,8 @@
+
+/assets/images/*
+!.gitkeep
+*.log
+*.bak
+*.tmp
+.env
+node_modules/
