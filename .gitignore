@@ -1,7 +1,11 @@
 
-/config/google/google-key.json
+/config/google/*
 /assets/videos/*
 /uploads/*
+
+assets/images/*
+composer.json
+composer.lock
 
 !.gitkeep
 *.log

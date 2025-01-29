@@ -25,3 +25,8 @@ AddType application/javascript .js
     ExpiresByType image/png "access plus 1 year"
     ExpiresByType image/webp "access plus 1 year"
 </IfModule>
+
+<Files "google-key.json">
+    Order Deny,Allow
+    Deny from all
+</Files>
