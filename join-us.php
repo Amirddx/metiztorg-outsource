@@ -1,6 +1,3 @@
-<?php
-// Страница "Устроиться к нам"
-?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -11,10 +8,10 @@
     <link rel="stylesheet" href="/assets/css/metiztorg-style.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
-<!-- Navbar -->
+<!-- navbar -->
 <?php include __DIR__ .'/includes/navbar.php'; ?>
 
-<!-- Main Content -->
+
 <main class="container my-5 flex-grow-1">
     <div class="row justify-content-center">
         <div class="col-lg-8">
@@ -23,25 +20,25 @@
                     <h1 class="text-center mb-4">Устроиться к нам</h1>
                     <p class="text-center">Заполните анкету ниже для отправки заявки.</p>
 
-                    <!-- Форма начнётся здесь -->
+                    <!-- начало формы -->
                     <form action="/forms/apply-handler.php" method="POST" class="form-group">
-                        <!-- Имя -->
+                        <!-- имя -->
                         <label for="name" class="form-label">Имя:</label>
                         <input type="text" id="name" name="name" class="form-control" placeholder="Введите ваше имя" required>
 
-                        <!-- Фамилия -->
+                        <!-- фамилия -->
                         <label for="surname" class="form-label mt-3">Фамилия:</label>
                         <input type="text" id="surname" name="surname" class="form-control" placeholder="Введите вашу фамилию" required>
 
-                        <!-- Email -->
+                        <!-- еmail -->
                         <label for="email" class="form-label mt-3">Email:</label>
                         <input type="email" id="email" name="email" class="form-control" placeholder="example@mail.com" required>
 
-                        <!-- Номер телефона -->
+                        <!--телефон -->
                         <label for="phone" class="form-label mt-3">Телефон:</label>
                         <input type="tel" id="phone" name="phone" class="form-control" placeholder="+7 (123) 456-78-90" required>
 
-                        <!-- Город (выпадающий список) -->
+                        <!-- город выпадающий список -->
                         <label for="city" class="form-label mt-3">Город:</label>
                         <select id="city" name="city" class="form-select" required>
                             <option value="" disabled selected>Выберите ваш город</option>
@@ -51,7 +48,7 @@
                             <option value="kazan">Казань</option>
                         </select>
 
-                        <!-- ЦФЗ (выпадающий список) -->
+                        <!-- ЦФЗ  -->
                         <label for="cfz" class="form-label mt-3">ЦФЗ:</label>
                         <select id="cfz" name="cfz" class="form-select" required>
                             <option value="" disabled selected>Выберите ЦФЗ</option>
@@ -61,11 +58,11 @@
                             <option value="west">Западный</option>
                         </select>
 
-                        <!-- Сообщение -->
+                        <!-- сообщение -->
                         <label for="message" class="form-label mt-3">Сообщение:</label>
                         <textarea id="message" name="message" class="form-control" rows="5" placeholder="Расскажите немного о себе"></textarea>
 
-                        <!-- Кнопка отправки -->
+                        <!-- кнопка отправки -->
                         <button type="submit" class="btn btn-primary mt-4">Отправить анкету</button>
                     </form>
 

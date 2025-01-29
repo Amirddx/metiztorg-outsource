@@ -1,9 +1,22 @@
 
-
+/config/google/google-key.json
 /assets/videos/*
+/uploads/*
+
 !.gitkeep
 *.log
 *.bak
 *.tmp
+*.swp
+
 .env
 node_modules/
+
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.~lock
+
+vendor/
+#composer require google/apiclient
