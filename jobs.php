@@ -1,15 +1,12 @@
 <?php
+
 require __DIR__ . '/services/GoogleSheetsAPI.php';
-require __DIR__ . '/services/YandexMapsAPI.php';
-
-
 
 use Services\GoogleSheetsAPI;
-use Services\YandexMapsAPI;
 
 $googleSheets = new GoogleSheetsAPI();
 $vacancies = $googleSheets->getVacancies();
-$mapData = YandexMapsAPI::getVacanciesForMap($vacancies);
+$mapData = json_encode($vacancies, JSON_UNESCAPED_UNICODE);
 ?>
 
 <!DOCTYPE html>
@@ -20,75 +17,95 @@ $mapData = YandexMapsAPI::getVacanciesForMap($vacancies);
     <title>Открытые Вакансии</title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/metiztorg-style.css">
+    <style>
+        #map {
+            width: 100%;
+            height: 600px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .vacancy-item {
+            transition: all 0.3s ease-in-out;
+        }
+        .vacancy-item:hover {
+            background-color: #f8f9fa;
+        }
+        .badge-status {
+            font-size: 0.9rem;
+            padding: 0.4em 0.7em;
+        }
+    </style>
 </head>
 <body>
 <?php include __DIR__ . '/includes/navbar.php'; ?>
 
-<main class="container my-5">
+<main class="container my-4">
     <h1 class="text-center mb-4">Открытые Вакансии</h1>
 
-    <div class="row">
-        <!-- блок для адресов -->
-        <div class="col-md-6">
-            <ul class="list-group" id="vacancy-list">
-                <?php foreach ($vacancies as $index => $vacancy): ?>
-                    <li class="list-group-item vacancy-item" data-index="<?php echo $index; ?>">
-                        📍 <strong><?php echo htmlspecialchars($vacancy['City']); ?></strong>,
-                        <?php echo htmlspecialchars($vacancy['Address']); ?>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
+    <!-- Фильтры -->
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <select class="form-select" id="filter-city">
+                <option value="">Выберите город</option>
+            </select>
         </div>
-        <!-- карта -->
-        <div class="col-md-6">
-            <div id="map" style="width: 100%; height: 500px;"></div>
+        <div class="col-md-4">
+            <select class="form-select" id="filter-position">
+                <option value="">Выберите должность</option>
+                <option value="Сборщик-партнер">Сборщик-партнёр</option>
+                <option value="Курьер">Курьер</option>
+                <option value="Велокурьер">Велокурьер</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Список вакансий -->
+        <div class="col-lg-5">
+            <div class="list-group" id="vacancy-list">
+                <?php foreach ($vacancies as $vacancy): ?>
+                    <a href="#" class="list-group-item list-group-item-action vacancy-item"
+                       data-address="<?php echo htmlspecialchars($vacancy['Address']); ?>">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <?php
+                            $status = trim(mb_strtolower($vacancy['Status'], 'UTF-8'));
+                            $badgeClass = ($status === 'открыта') ? 'success' : 'danger';
+                            ?>
+                            <span class="badge bg-<?php echo $badgeClass; ?> badge-status">
+                    <?php echo htmlspecialchars($vacancy['Status']); ?>
+                </span>
+                            <span class="badge bg-secondary badge-status">ЦФЗ</span>
+                        </div>
+                        <strong class="d-block mt-2 text-primary">
+                            <?php echo htmlspecialchars($vacancy['Address']); ?> <!-- Оставляем только адрес -->
+                        </strong>
+                        <small class="text-muted"><?php echo htmlspecialchars($vacancy['District']); ?></small>
+                        <div class="mt-2">
+                            <span class="text-muted"><?php echo htmlspecialchars($vacancy['Position']); ?></span> |
+                            <strong><?php echo htmlspecialchars($vacancy['Headcount']); ?></strong> чел. |
+                            <span class="text-muted"><?php echo htmlspecialchars($vacancy['Slots']); ?></span>
+                        </div>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+про
+        </div>
+
+        <!-- Карта -->
+        <div class="col-lg-7">
+            <div id="map"></div>
         </div>
     </div>
 </main>
 
 <?php include __DIR__ . '/includes/footer.php'; ?>
 
-<!-- Подкл апи яндекс карт -->
-<script src="https://api-maps.yandex.ru/2.1/?apikey=<?php echo YANDEX_API_KEY;?>&lang=ru_RU"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var map;
-        var mapData = <?php echo $mapData; ?>;
-        var placemarks = [];
+<!-- Передаём JSON с вакансиями в скрытый тег -->
+<script id="vacancies-data" type="application/json"><?php echo $mapData; ?></script>
 
-        ymaps.ready(function () {
-            map = new ymaps.Map("map", {
-                center: [55.751244, 37.618423], //по умолчанию Москва
-                zoom: 10
-            });
-
-            // Доб. все точки сразу
-            mapData.forEach((item, index) => {
-                ymaps.geocode(item.address).then(function (res) {
-                    var firstGeoObject = res.geoObjects.get(0);
-                    if (firstGeoObject) {
-                        var coords = firstGeoObject.geometry.getCoordinates();
-                        var placemark = new ymaps.Placemark(coords, {
-                            balloonContent: `<strong>${item.city}</strong><br>${item.address}`
-                        });
-
-                        map.geoObjects.add(placemark);
-                        placemarks[index] = placemark;
-                    }
-                });
-            });
-
-            // При клике на вакансию  приближение карту к точке
-            document.querySelectorAll(".vacancy-item").forEach((item) => {
-                item.addEventListener("click", function () {
-                    var index = this.getAttribute("data-index");
-                    if (placemarks[index]) {
-                        map.setCenter(placemarks[index].geometry.getCoordinates(), 15, { duration: 500 });
-                    }
-                });
-            });
-        });
-    });
-</script>
+<!-- Подключаем API Яндекс.Карт -->
+<script src="https://api-maps.yandex.ru/2.1/?apikey=<?php echo YANDEX_API_KEY; ?>&lang=ru_RU"></script>
+<script src="assets/js/yandex-map.js"></script>
+<script src="assets/js/vacancy-filters.js"></script>
 </body>
 </html>
