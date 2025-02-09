@@ -6,73 +6,102 @@
     <title>Устроиться к нам</title>
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/metiztorg-style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
-<!-- navbar -->
-<?php include __DIR__ .'/includes/navbar.php'; ?>
 
+<!-- Навигация -->
+<?php include __DIR__ .'/includes/navbar.php'; ?>
 
 <main class="container my-5 flex-grow-1">
     <div class="row justify-content-center">
         <div class="col-lg-8">
-            <div class="card shadow">
-                <div class="card-body">
-                    <h1 class="text-center mb-4">Устроиться к нам</h1>
-                    <p class="text-center">Заполните анкету ниже для отправки заявки.</p>
+            <h2 class="text-center mb-4">Присоединяйтесь к нашей команде</h2>
+            <p class="text-center text-muted">Заполните форму и прикрепите необходимые документы.</p>
 
-                    <!-- начало формы -->
-                    <form action="/forms/apply-handler.php" method="POST" class="form-group">
-                        <!-- имя -->
-                        <label for="name" class="form-label">Имя:</label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Введите ваше имя" required>
+            <div class="shadow-lg p-4 bg-white rounded-3">
+                <form class="contact-form" enctype="multipart/form-data">
+                    <div class="row g-3">
 
-                        <!-- фамилия -->
-                        <label for="surname" class="form-label mt-3">Фамилия:</label>
-                        <input type="text" id="surname" name="surname" class="form-control" placeholder="Введите вашу фамилию" required>
+                        <!-- ФИО -->
+                        <div class="col-md-6">
+                            <label class="form-label">Фамилия <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" placeholder="Иванов" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Имя <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" placeholder="Иван" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Отчество</label>
+                            <input type="text" class="form-control" placeholder="Петрович">
+                        </div>
 
-                        <!-- еmail -->
-                        <label for="email" class="form-label mt-3">Email:</label>
-                        <input type="email" id="email" name="email" class="form-control" placeholder="example@mail.com" required>
+                        <!-- Контакты -->
+                        <div class="col-md-6">
+                            <label class="form-label">Телефон <span class="text-danger">*</span></label>
+                            <input type="tel" class="form-control phone-mask" placeholder="+7 (900) 123-45-67" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" placeholder="example@mail.com">
+                        </div>
 
-                        <!--телефон -->
-                        <label for="phone" class="form-label mt-3">Телефон:</label>
-                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="+7 (123) 456-78-90" required>
+                        <!-- Гражданство -->
+                        <div class="col-md-6">
+                            <label class="form-label">Гражданство <span class="text-danger">*</span></label>
+                            <select class="form-select" id="citizenship" required>
+                                <option value="Россия" selected>Россия</option>
+                                <option value="Беларусь">Беларусь</option>
+                                <option value="Казахстан">Казахстан</option>
+                                <option value="Другие">Другое</option>
+                            </select>
+                        </div>
 
-                        <!-- город выпадающий список -->
-                        <label for="city" class="form-label mt-3">Город:</label>
-                        <select id="city" name="city" class="form-select" required>
-                            <option value="" disabled selected>Выберите ваш город</option>
-                            <option value="moscow">Москва</option>
-                            <option value="spb">Санкт-Петербург</option>
-                            <option value="ekb">Екатеринбург</option>
-                            <option value="kazan">Казань</option>
-                        </select>
+                        <!-- Файлы (Россия) -->
+                        <div class="document-fields doc-russia">
+                            <div class="col-md-12">
+                                <label class="form-label">Паспорт (1-я страница) <span class="text-danger">*</span></label>
+                                <div class="file-upload">
+                                    <input type="file" class="file-input d-none" accept=".jpg,.jpeg,.png,.pdf" required>
+                                    <div class="file-preview-container"></div>
+                                    <button type="button" class="btn file-btn">
+                                        <i class="bi bi-paperclip"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
 
-                        <!-- ЦФЗ  -->
-                        <label for="cfz" class="form-label mt-3">ЦФЗ:</label>
-                        <select id="cfz" name="cfz" class="form-select" required>
-                            <option value="" disabled selected>Выберите ЦФЗ</option>
-                            <option value="north">Северный</option>
-                            <option value="south">Южный</option>
-                            <option value="east">Восточный</option>
-                            <option value="west">Западный</option>
-                        </select>
+                        <!-- Файлы (Иностранцы) -->
+                        <div class="document-fields doc-foreign d-none">
+                            <div class="col-md-12">
+                                <label class="form-label">Загранпаспорт <span class="text-danger">*</span></label>
+                                <div class="file-upload">
+                                    <input type="file" class="file-input d-none" accept=".jpg,.jpeg,.png,.pdf" required>
+                                    <div class="file-preview-container"></div>
+                                    <button type="button" class="btn file-btn">
+                                        <i class="bi bi-paperclip"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
 
-                        <!-- сообщение -->
-                        <label for="message" class="form-label mt-3">Сообщение:</label>
-                        <textarea id="message" name="message" class="form-control" rows="5" placeholder="Расскажите немного о себе"></textarea>
-
-                        <!-- кнопка отправки -->
-                        <button type="submit" class="btn btn-primary mt-4">Отправить анкету</button>
-                    </form>
-
-                </div>
+                        <!-- Кнопка отправки -->
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-warning px-4 fw-bold">Отправить</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </main>
 
-<!-- FOOTER-->
+<!-- Подвал -->
 <?php include __DIR__ .'/includes/footer.php'; ?>
+
+<!-- Подключение внешнего JavaScript -->
+<script src="/assets/js/form-handler.js"></script>
+
 </body>
 </html>

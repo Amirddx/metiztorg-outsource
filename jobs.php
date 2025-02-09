@@ -47,17 +47,27 @@ $mapData = json_encode($vacancies, JSON_UNESCAPED_UNICODE);
         <div class="col-md-4">
             <select class="form-select" id="filter-city">
                 <option value="">Выберите город</option>
+                <?php
+                $uniqueCities = array_unique(array_column($vacancies, 'City')); // Получаем уникальные города
+                sort($uniqueCities); // Сортируем по алфавиту
+                foreach ($uniqueCities as $city): ?>
+                    <option value="<?php echo htmlspecialchars($city); ?>"><?php echo htmlspecialchars($city); ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
         <div class="col-md-4">
             <select class="form-select" id="filter-position">
                 <option value="">Выберите должность</option>
-                <option value="Сборщик-партнер">Сборщик-партнёр</option>
-                <option value="Курьер">Курьер</option>
-                <option value="Велокурьер">Велокурьер</option>
+                <?php
+                $uniquePositions = array_unique(array_column($vacancies, 'Position')); // Получаем уникальные должности
+                sort($uniquePositions); // Сортируем по алфавиту
+                foreach ($uniquePositions as $position): ?>
+                    <option value="<?php echo htmlspecialchars($position); ?>"><?php echo htmlspecialchars($position); ?></option>
+                <?php endforeach; ?>
             </select>
         </div>
     </div>
+
 
     <div class="row">
         <!-- Список вакансий -->
@@ -88,7 +98,7 @@ $mapData = json_encode($vacancies, JSON_UNESCAPED_UNICODE);
                     </a>
                 <?php endforeach; ?>
             </div>
-про
+
         </div>
 
         <!-- Карта -->
