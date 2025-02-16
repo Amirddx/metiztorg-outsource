@@ -1,5 +1,4 @@
 <?php
-
 require __DIR__ . '/services/GoogleSheetsAPI.php';
 
 use Services\GoogleSheetsAPI;
@@ -48,8 +47,8 @@ $mapData = json_encode($vacancies, JSON_UNESCAPED_UNICODE);
             <select class="form-select" id="filter-city">
                 <option value="">Выберите город</option>
                 <?php
-                $uniqueCities = array_unique(array_column($vacancies, 'City')); // Получаем уникальные города
-                sort($uniqueCities); // Сортируем по алфавиту
+                $uniqueCities = array_unique(array_column($vacancies, 'City'));
+                sort($uniqueCities);
                 foreach ($uniqueCities as $city): ?>
                     <option value="<?php echo htmlspecialchars($city); ?>"><?php echo htmlspecialchars($city); ?></option>
                 <?php endforeach; ?>
@@ -59,8 +58,8 @@ $mapData = json_encode($vacancies, JSON_UNESCAPED_UNICODE);
             <select class="form-select" id="filter-position">
                 <option value="">Выберите должность</option>
                 <?php
-                $uniquePositions = array_unique(array_column($vacancies, 'Position')); // Получаем уникальные должности
-                sort($uniquePositions); // Сортируем по алфавиту
+                $uniquePositions = array_unique(array_column($vacancies, 'Position'));
+                sort($uniquePositions);
                 foreach ($uniquePositions as $position): ?>
                     <option value="<?php echo htmlspecialchars($position); ?>"><?php echo htmlspecialchars($position); ?></option>
                 <?php endforeach; ?>
@@ -68,13 +67,14 @@ $mapData = json_encode($vacancies, JSON_UNESCAPED_UNICODE);
         </div>
     </div>
 
-
     <div class="row">
         <!-- Список вакансий -->
         <div class="col-lg-5">
             <div class="list-group" id="vacancy-list">
                 <?php foreach ($vacancies as $vacancy): ?>
                     <a href="#" class="list-group-item list-group-item-action vacancy-item"
+                       data-city="<?php echo htmlspecialchars($vacancy['City']); ?>"
+                       data-position="<?php echo htmlspecialchars($vacancy['Position']); ?>"
                        data-address="<?php echo htmlspecialchars($vacancy['Address']); ?>">
                         <div class="d-flex justify-content-between align-items-center">
                             <?php
@@ -87,7 +87,7 @@ $mapData = json_encode($vacancies, JSON_UNESCAPED_UNICODE);
                             <span class="badge bg-secondary badge-status">ЦФЗ</span>
                         </div>
                         <strong class="d-block mt-2 text-primary">
-                            <?php echo htmlspecialchars($vacancy['Address']); ?> <!-- Оставляем только адрес -->
+                            <?php echo htmlspecialchars($vacancy['Address']); ?>
                         </strong>
                         <small class="text-muted"><?php echo htmlspecialchars($vacancy['District']); ?></small>
                         <div class="mt-2">
@@ -98,7 +98,7 @@ $mapData = json_encode($vacancies, JSON_UNESCAPED_UNICODE);
                     </a>
                 <?php endforeach; ?>
             </div>
-
+            <button id="show-more-vacancies" class="btn btn-outline-primary w-100 mt-3">Показать все</button>
         </div>
 
         <!-- Карта -->
