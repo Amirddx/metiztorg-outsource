@@ -1,5 +1,7 @@
 
 /config/google/*
+/config/yandex/*
+/config/mailgun/*
 /assets/videos/*
 /uploads/*
 
