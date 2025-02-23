@@ -400,7 +400,7 @@
                 </div>
             </section>
 
-           <?php include __DIR__.'/includes/maps.php'?>
+
 
         </main>
 

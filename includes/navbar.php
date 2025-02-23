@@ -14,12 +14,12 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
-                <li class="nav-item active">
+                <li class="nav-item ">
                     <a class="nav-link" href="/index.php">Главная</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/index.php"> О нас</a>
+                    <a class="nav-link" href="/friends-bonus.php"> Реферальная программа</a>
                 </li>
 
 
@@ -34,7 +34,7 @@
 
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#contact">Свяжитесь с нами</a>
+                    <a class="nav-link" href="/contact.php">Свяжитесь с нами</a>
                 </li>
             </ul>
         </div>
