@@ -12,31 +12,25 @@ function initMap() {
     });
 
     vacancies.forEach((vacancy) => {
-        let address = vacancy.Address;
-        let city = vacancy.City;
+        let coords = vacancy.Coordinates;
 
-        ymaps.geocode(city + ", " + address).then(function (res) {
-            let firstGeoObject = res.geoObjects.get(0);
+        if (coords && coords.length === 2) {
+            let placemark = new ymaps.Placemark(coords, {
+                balloonContentHeader: `<strong style="font-size: 16px; color: #0056b3;">${vacancy.Position}</strong>`,
+                balloonContentBody: `
+                    <p><b>Адрес:</b> ${vacancy.Address}</p>
+                    <p><b>Кол-во мест:</b> ${vacancy.Headcount} чел.</p>
+                    <p><b>Ставка:</b> ${vacancy.HourlyPay} руб./час</p>
+                    <p><b>График:</b> ${vacancy.Slots}</p>
+                    <p><b>Акции:</b> ${vacancy.Promotions || 'Нет'}</p>
+                `,
+                balloonContentFooter: '<small style="color: #888;">Кликните, чтобы закрыть</small>'
+            }, {
+                preset: 'islands#blueDotIcon',
+                openBalloonOnClick: true
+            });
 
-            if (firstGeoObject) {
-                let coords = firstGeoObject.geometry.getCoordinates();
-                let placemark = new ymaps.Placemark(coords, {
-                    balloonContentHeader: `<strong style="font-size: 16px; color: #0056b3;">${vacancy.Position}</strong>`,
-                    balloonContentBody: `
-                        <p><b>Адрес:</b> ${address}</p>
-                        <p><b>Кол-во мест:</b> ${vacancy.Headcount} чел.</p>
-                        <p><b>Ставка:</b> ${vacancy.HourlyPay} руб./час</p>
-                        <p><b>График:</b> ${vacancy.Slots}</p>
-                        <p><b>Акции:</b> ${vacancy.Promotions || 'Нет'}</p>
-                    `,
-                    balloonContentFooter: '<small style="color: #888;">Кликните, чтобы закрыть</small>'
-                }, {
-                    preset: 'islands#blueDotIcon',
-                    openBalloonOnClick: true
-                });
-
-                map.geoObjects.add(placemark);
-            }
-        });
+            map.geoObjects.add(placemark);
+        }
     });
 }
