@@ -10,43 +10,35 @@ require_once __DIR__ . '/YandexMapsAPI.php';
 use Google\Client;
 use Google\Service\Sheets;
 use Services\YandexMapsAPI;
-
-class GoogleSheetsAPI
-{
+class GoogleSheetsAPI {
     private $service;
     private $cache;
 
-    public function __construct()
-    {
+    public function __construct() {
         $client = new Client();
         $client->setScopes(Sheets::SPREADSHEETS_READONLY);
         $client->setAuthConfig(GOOGLE_KEY_PATH);
         $this->service = new Sheets($client);
-
-        $this->cache = new Cache(); // Подключаем кэш
+        $this->cache = new Cache(); // Используем кэш
     }
 
-    public function getVacancies()
-    {
-        // Читаем кэш
+    public function getVacancies() {
+        // Загружаем кэш
         $cachedData = $this->cache->getCache();
-
-        // Если вакансии в кэше актуальны, возвращаем их
-        if (!empty($cachedData['vacancies']) && !$this->cache->isCacheExpired()) {
-            return $cachedData['vacancies'];
+        if (!$this->cache->isCacheExpired()) {
+            return $cachedData['vacancies']; // Возвращаем, если кэш актуален
         }
 
-
-        // Если кэш устарел или пуст, запрашиваем данные из Google Sheets
+        // Загружаем данные из Google Sheets
         $range = "'Вакансии'!A:Z";
         try {
             $response = $this->service->spreadsheets_values->get(GOOGLE_SPREADSHEET_ID, $range);
             $values = $response->getValues();
-
             if (empty($values)) {
                 return [];
             }
 
+            // Определяем нужные столбцы
             $columns = [
                 'City' => 'A',
                 'Date' => 'C',
@@ -69,33 +61,49 @@ class GoogleSheetsAPI
                 $columnIndexes[$key] = $colIndex;
             }
 
+            // Собираем вакансии
             $vacancies = [];
+            $addressesToGeocode = []; // Адреса, у которых нет координат
+
             foreach ($values as $row) {
                 $vacancy = [];
                 foreach ($columnIndexes as $key => $index) {
                     $vacancy[$key] = $row[$index] ?? '';
                 }
 
-                // Получаем координаты, если они отсутствуют в кэше
-                $cachedCoords = $this->cache->getCoordinates($vacancy['City'] . ', ' . $vacancy['Address']);
-                if ($cachedCoords) {
-                    $vacancy['Coordinates'] = $cachedCoords;
+                // Проверяем, есть ли координаты в кэше
+                $coords = $this->cache->getCoordinates($vacancy['Address']);
+                if (!$coords) {
+                    $addressesToGeocode[] = $vacancy['Address'];
                 } else {
-                    $coords = YandexMapsAPI::getCoordinates($vacancy['City'], $vacancy['Address']);
-                    if ($coords) {
-                        $vacancy['Coordinates'] = $coords;
-                        $this->cache->saveCoordinates($vacancy['City'] . ', ' . $vacancy['Address'], $coords);
-                    }
+                    $vacancy['Coordinates'] = $coords;
                 }
 
                 $vacancies[] = $vacancy;
             }
 
-            // Обновляем кэш
+            // Если есть адреса без координат → пакетный запрос
+            if (!empty($addressesToGeocode)) {
+                $newCoordinates = YandexMapsAPI::getCoordinatesBatch($addressesToGeocode);
+                foreach ($newCoordinates as $address => $coords) {
+                    $this->cache->saveCoordinates($address, $coords);
+                }
+
+                // **Добавляем координаты к вакансиям**
+                foreach ($vacancies as &$vacancy) {
+                    if (isset($newCoordinates[$vacancy['Address']])) {
+                        $vacancy['Coordinates'] = $newCoordinates[$vacancy['Address']];
+                    }
+                }
+            }
+
+            // Сохраняем вакансии в кэш
             $this->cache->updateCache($vacancies);
             return $vacancies;
         } catch (\Exception $e) {
             return [];
         }
     }
+
+
 }

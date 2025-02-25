@@ -1,28 +1,37 @@
-
+# Игнорируем конфигурации
 /config/google/*
 /config/yandex/*
 /config/mailgun/*
+
+# Игнорируем медиа и загрузки
 /assets/videos/*
 /uploads/*
+/cache/*
+/assets/images/*
 
-assets/images/*
-composer.json
-composer.lock
-
-!.gitkeep
+# Игнорируем временные файлы и логи
 *.log
 *.bak
 *.tmp
 *.swp
-
-.env
-node_modules/
-
-.DS_Store
-Thumbs.db
-.idea/
-.vscode/
 *.~lock
 
+# Игнорируем системные файлы
+.DS_Store
+Thumbs.db
+
+# Игнорируем IDE-файлы
+.idea/
+.vscode/
+
+# Игнорируем зависимости
+node_modules/
 vendor/
-#composer require google/apiclient
+
+# Игнорируем .env-файлы
+.env
+.env.local
+.env.*.local
+
+# Не игнорируем .gitkeep
+!.gitkeep
