@@ -65,6 +65,9 @@ $mapData = json_encode($vacancies, JSON_UNESCAPED_UNICODE);
                 <?php endforeach; ?>
             </select>
         </div>
+        <div class="col-md-4">
+            <button class="btn btn-outline-secondary w-100" id="reset-filters" disabled>Сбросить фильтры</button>
+        </div>
     </div>
 
     <div class="row">
@@ -98,7 +101,7 @@ $mapData = json_encode($vacancies, JSON_UNESCAPED_UNICODE);
                     </a>
                 <?php endforeach; ?>
             </div>
-            <button id="show-more-vacancies" class="btn btn-outline-primary w-100 mt-3">Показать все</button>
+            <button id="show-more-vacancies" class="btn btn-outline-secondary w-100 mt-3">Показать все</button>
         </div>
 
         <!-- Карта -->

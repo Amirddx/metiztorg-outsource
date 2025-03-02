@@ -1,56 +1,64 @@
 <?php
-
-require '../vendor/autoload.php'; // Подключаем зависимости mailgun SDK
+require '../vendor/autoload.php';
 require '../includes/config.php';
+require 'join-us-validate.php';
 use Mailgun\Mailgun;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    //  API mailgun
     $apiKey = MAILGUN_API_KEY;
-    $domain = 'sandbox7ec456c8be9841d3b6133c7a43c9327b.mailgun.org';
+    $domain = 'sandbox6ec456c8be9841d3b6133c7a43c9327b.mailgun.org';
     $mg = Mailgun::create($apiKey);
 
-    //  Данные из формы
-    $lastName = $_POST['lastName'] ?? '';
-    $firstName = $_POST['firstName'] ?? '';
-    $middleName = $_POST['middleName'] ?? '';
-    $phone = $_POST['phone'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $citizenship = $_POST['citizenship'] ?? '';
+    $validationResult = validateJoinUsForm($_POST, $_FILES);
 
-    //  Формируем тело письма
+    if (!empty($validationResult['errors'])) {
+        http_response_code(400);
+        echo json_encode(['errors' => $validationResult['errors']]);
+        exit();
+    }
+
+    $data = $validationResult['data'];
+    $attachments = $validationResult['attachments'];
+
     $subject = "Новая заявка на трудоустройство";
     $message = "
-        <h2>Новая заявка на работу</h2>
-        <p><strong>Фамилия:</strong> $lastName</p>
-        <p><strong>Имя:</strong> $firstName</p>
-        <p><strong>Отчество:</strong> $middleName</p>
-        <p><strong>Телефон:</strong> $phone</p>
-        <p><strong>Email:</strong> $email</p>
-        <p><strong>Гражданство:</strong> $citizenship</p>
+        <h1>Курлык-Курлык!</h1>
+        <h2>Прими почтового голубя! {$data['lastName']} {$data['firstName']} {$data['middleName']} загрузил документы на трудоустройство!</h2>
+        <p><strong>Фамилия:</strong> {$data['lastName']}</p>
+        <p><strong>Имя:</strong> {$data['firstName']}</p>
+        <p><strong>Отчество:</strong> {$data['middleName']}</p>
+        <p><strong>Телефон:</strong> {$data['phone']}</p>
+        <p><strong>Email:</strong> {$data['email']}</p>
+        <p><strong>Гражданство:</strong> {$data['citizenship']}</p>
+        <p><strong>Согласие на обработку данных:</strong> Да</p>
+        <h3>Прикрепленные документы:</h3>
+        <ul>
     ";
 
-    //  Настраиваем отправку
-    $attachments = [];
-    if (!empty($_FILES['passport']['tmp_name'])) {
-        $attachments[] = ['filePath' => $_FILES['passport']['tmp_name'], 'filename' => $_FILES['passport']['name']];
+    foreach ($attachments as $attachment) {
+        $message .= "<li>{$attachment['filename']}</li>";
     }
+    $message .= "</ul>";
 
-    if (!empty($_FILES['foreign_passport']['tmp_name'])) {
-        $attachments[] = ['filePath' => $_FILES['foreign_passport']['tmp_name'], 'filename' => $_FILES['foreign_passport']['name']];
+    try {
+        $mg->messages()->send($domain, [
+            'from'    => 'Заявка <noreply@' . $domain . '>',
+            'to'      => 'metiztorg@gmail.com',
+            'subject' => $subject,
+            'html'    => $message,
+            'attachment' => $attachments
+        ]);
+
+        header("Location: /success.php");
+        exit();
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode(['error' => 'Ошибка при отправке письма: ' . $e->getMessage()]);
+        exit();
     }
-
-    //  Отправляем письмо
-    $mg->messages()->send($domain, [
-        'from'    => 'HR Метизторг <noreply@' . $domain . '>',
-        'to'      => 'amirgafurovv@mail.ru',
-        'subject' => $subject,
-        'html'    => $message,
-        'attachment' => $attachments
-    ]);
-// Если письмо отправлено успешно – перенаправляем пользователя
-    header("Location: success.php");
+} else {
+    http_response_code(405);
+    echo json_encode(['error' => 'Метод не разрешен']);
     exit();
-
 }
 ?>

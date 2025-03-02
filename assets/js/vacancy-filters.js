@@ -3,52 +3,74 @@ document.addEventListener("DOMContentLoaded", function () {
     const positionFilter = document.getElementById("filter-position");
     const vacancies = Array.from(document.querySelectorAll(".vacancy-item"));
     const showMoreButton = document.getElementById("show-more-vacancies");
+    const resetButton = document.getElementById("reset-filters");
 
-    let visibleCount = 7; // кол-во вакансий при загрузке
+    let visibleCount = 7;
 
+    // Применение фильтров
     function applyFilters() {
-        let selectedCity = cityFilter.value.trim().toLowerCase();
-        let selectedPosition = positionFilter.value.trim().toLowerCase();
+        const selectedCity = cityFilter.value.trim().toLowerCase();
+        const selectedPosition = positionFilter.value.trim().toLowerCase();
 
-        let filteredVacancies = vacancies.filter(vacancy => {
-            let city = vacancy.getAttribute("data-city")?.toLowerCase() || "";
-            let position = vacancy.getAttribute("data-position")?.toLowerCase() || "";
-
-            let cityMatch = !selectedCity || city === selectedCity;
-            let positionMatch = !selectedPosition || position === selectedPosition;
-
-            return cityMatch && positionMatch;
+        const filteredVacancies = vacancies.filter(vacancy => {
+            const city = vacancy.getAttribute("data-city")?.toLowerCase() || "";
+            const position = vacancy.getAttribute("data-position")?.toLowerCase() || "";
+            return (!selectedCity || city === selectedCity) && (!selectedPosition || position === selectedPosition);
         });
 
         updateVacancyList(filteredVacancies);
+        updateResetButtonState();
     }
 
+    // Обновление списка вакансий
     function updateVacancyList(filteredVacancies) {
-        vacancies.forEach(vacancy => vacancy.style.display = "none"); // Скрываем всё
-
-        // показ только 7 вакансий сначала
-        filteredVacancies.slice(0, visibleCount).forEach(vacancy => {
-            vacancy.style.display = "block";
-        });
-
-        // показывать/скрывать кнопку "Показать все"
-        showMoreButton.style.display = (filteredVacancies.length > visibleCount) ? "block" : "none";
+        vacancies.forEach(vacancy => vacancy.style.display = "none");
+        filteredVacancies.slice(0, visibleCount).forEach(vacancy => vacancy.style.display = "block");
+        showMoreButton.style.display = filteredVacancies.length > visibleCount ? "block" : "none";
     }
 
-    // нажатие на "Показать все"
-    showMoreButton.addEventListener("click", function () {
-        visibleCount += 10; // увелич-ем лимит на 10 вакансий
+    // Обновление состояния кнопки сброса
+    function updateResetButtonState() {
+        const cityValue = cityFilter.value;
+        const positionValue = positionFilter.value;
+        const isCitySelected = cityValue !== "" && cityValue !== null;
+        const isPositionSelected = positionValue !== "" && positionValue !== null;
+        const shouldEnable = isCitySelected || isPositionSelected;
+
+        // Для отладки: выводим значения в консоль
+        console.log("City:", cityValue, "Position:", positionValue, "Enable Reset:", shouldEnable);
+
+        resetButton.disabled = !shouldEnable;
+    }
+
+    // Сброс фильтров
+    function resetFilters() {
+        cityFilter.value = "";
+        positionFilter.value = "";
+        visibleCount = 7;
+        applyFilters(); // Обновляем список и состояние кнопки
+    }
+
+    // Обработчики событий
+    cityFilter.addEventListener("change", () => {
+        visibleCount = 7;
         applyFilters();
     });
 
-    // При изменении фильтра сбрасываем пагинацию
-    function resetPagination() {
+    positionFilter.addEventListener("change", () => {
         visibleCount = 7;
         applyFilters();
-    }
+    });
 
-    cityFilter.addEventListener("change", resetPagination);
-    positionFilter.addEventListener("change", resetPagination);
+    showMoreButton.addEventListener("click", () => {
+        visibleCount += 10;
+        applyFilters();
+    });
 
-    applyFilters(); // Запуск фильтр при загрузке
+    resetButton.addEventListener("click", () => {
+        resetFilters();
+    });
+
+    // Инициализация
+    applyFilters();
 });
