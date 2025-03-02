@@ -26,3 +26,11 @@ if (file_exists($mailgunConfigPath)) {
         define('MAILGUN_API_KEY', $mailgunConfig['MAILGUN_API_KEY']);
     }
 }
+// Подключаем конфигурацию reCAPTCHA
+$recaptchaConfigPath = __DIR__ . '/../config/google/recaptcha-keys.php';
+if (file_exists($recaptchaConfigPath)) {
+    $recaptchaConfig = require $recaptchaConfigPath;
+    if (!defined('RECAPTCHA_SECRET_KEY')) {
+        define('RECAPTCHA_SECRET_KEY', $recaptchaConfig['RECAPTCHA_SECRET_KEY']);
+    }
+}
