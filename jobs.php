@@ -16,6 +16,7 @@ $mapData = json_encode($vacancies, JSON_UNESCAPED_UNICODE);
     <title>Открытые Вакансии</title>
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/metiztorg-style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         #map {
             width: 100%;
@@ -120,5 +121,6 @@ $mapData = json_encode($vacancies, JSON_UNESCAPED_UNICODE);
 <script src="https://api-maps.yandex.ru/2.1/?apikey=<?php echo YANDEX_API_KEY; ?>&lang=ru_RU"></script>
 <script src="assets/js/yandex-map.js"></script>
 <script src="assets/js/vacancy-filters.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
