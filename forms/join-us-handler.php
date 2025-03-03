@@ -124,14 +124,14 @@ if (!empty($errors)) {
 }
 
 // Формирование письма
-$subject = "Новая заявка на трудоустройство";
+$subject = "Новая заявка на трудоустройство.";
 $message = "
-    <h1>Новая заявка</h1>
-    <p><strong>ФИО:</strong> {$data['lastName']} {$data['firstName']} {$data['middleName']}</p>
-    <p><strong>Телефон:</strong> {$data['phone']}</p>
-    <p><strong>Email:</strong> {$data['email']}</p>
-    <p><strong>Гражданство:</strong> {$data['citizenship']}</p>
-    <h3>Документы:</h3>
+    <h1>Курлык-Курлык! Прими почтового голубя..</h1>
+    <h3><strong>ФИО:</strong> {$data['lastName']} {$data['firstName']} {$data['middleName']}</h3>
+    <h3><strong>Телефон:</strong> {$data['phone']}</h3>
+    <h3><strong>Email:</strong> {$data['email']}</h3>
+    <h3><strong>Гражданство:</strong> {$data['citizenship']}</h3>
+    <h1>Документы:</h1>
     <ul>" . implode('', array_map(fn($a) => "<li>{$a['filename']}</li>", $attachments)) . "</ul>
 ";
 
@@ -141,7 +141,7 @@ $domain = 'sandbox7ec456c8be9841d3b6133c7a43c9327b.mailgun.org';
 
 try {
     $mg->messages()->send($domain, [
-        'from' => 'Заявка <noreply@' . $domain . '>',
+        'from' => 'Заявка <postmaster@24metiztorg-samokat.ru>',
         'to' => 'metiztorgtech@gmail.com',
         'subject' => $subject,
         'html' => $message,

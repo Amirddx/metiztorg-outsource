@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-light shadow-lg">
     <div class="container">
-        <a class="navbar-brand d-flex align-items-center" href="index.html">
-            <img src="assets/fonts/icons8-аутентификация-48.png" alt="Логотип"
+        <a class="navbar-brand d-flex align-items-center" href="/index.php">
+            <img src="/assets/fonts/icons8-аутентификация-48.png" alt="Логотип"
                  style="height: 44px; width: auto; vertical-align: middle; margin-right: 8px;">
             <strong style="font-size: 1.5rem;">Метизторг</strong>
         </a>

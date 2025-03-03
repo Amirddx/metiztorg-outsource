@@ -7,6 +7,8 @@
     <title>Заявка отправлена</title>
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/css/metiztorg-style.css">
+
+    <link rel="icon" type="image/png" href="/assets/fonts/icons8-аутентификация-48.png">
 </head>
 <body class="d-flex flex-column min-vh-100">
 
