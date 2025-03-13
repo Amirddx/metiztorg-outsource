@@ -19,7 +19,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/friends-bonus.php"> Реферальная программа</a>
+                    <a class="nav-link" href="#calculator"> Калькулятор дохода</a>
                 </li>
 
 

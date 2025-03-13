@@ -141,27 +141,108 @@
             <h2 class="text-center fw-bold mb-5" data-aos="fade-up">Акции и бонусы в нашей компании</h2>
             <div class="row g-4 justify-content-center">
                 <div class="col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card border-0 shadow h-100">
-<!--                        <img src="assets/images/people/фотка_3.jpg" class="card-img-top" alt="Бонус за скорость">-->
-                        <div class="card-body text-center">
+                    <div class="card border-0 shadow h-100 d-flex flex-column">
+                        <div id="bonusCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <?php
+                                $dir = 'assets/images/people/';
+                                $files = scandir($dir);
+                                $first = true;
+                                foreach ($files as $file) {
+                                    if (in_array(pathinfo($file, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
+                                        $activeClass = $first ? ' active' : '';
+                                        echo '<div class="carousel-item' . $activeClass . '">';
+//                                        размер фото
+                                        echo '<img src="' . $dir . $file . '" class="card-img-top" alt="Бонус за скорость - ' . $file . '" style="height: 400px; object-fit: cover;">';
+                                        echo '</div>';
+                                        $first = false;
+                                    }
+                                }
+                                ?>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#bonusCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Назад</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#bonusCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Вперёд</span>
+                            </button>
+                        </div>
+                        <div class="card-body text-center d-flex flex-column flex-grow-1">
                             <h5 class="card-title fw-bold">Бонус за скорость</h5>
-                            <p class="card-text text-muted">Оформись онлайн до 1 апреля и получи +500 ₽ к первой выплате!</p>
+                            <p class="card-text text-muted flex-grow-1">Оформись онлайн до 1 апреля и получи +500 ₽ к первой выплате!</p>
                             <a href="join-us.php" class="btn btn-outline-warning btn-sm mt-2">Оформиться сейчас</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6" data-aos="fade-up" data-aos-delay="400">
-                    <div class="card border-0 shadow h-100">
-<!--                        <img src="assets/images/people/фотка_5.jpg" class="card-img-top" alt="Реферальная программа">-->
-                        <div class="card-body text-center">
+                    <div class="card border-0 shadow h-100 d-flex flex-column">
+                        <div id="referralCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                                <?php
+                                $dir = 'assets/images/people/';
+                                $files = scandir($dir);
+                                $first = true;
+                                foreach ($files as $file) {
+                                    if (in_array(pathinfo($file, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png'])) {
+                                        $activeClass = $first ? ' active' : '';
+                                        echo '<div class="carousel-item' . $activeClass . '">';
+//                                        размер фото
+                                        echo '<img src="' . $dir . $file . '" class="card-img-top" alt="Приглашай друзей - ' . $file . '" style="height: 400px; object-fit: cover;">';
+                                        echo '</div>';
+                                        $first = false;
+                                    }
+                                }
+                                ?>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#referralCarousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Назад</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#referralCarousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Вперёд</span>
+                            </button>
+                        </div>
+                        <div class="card-body text-center d-flex flex-column flex-grow-1">
                             <h5 class="card-title fw-bold">Приглашай друзей</h5>
-                            <p class="card-text text-muted">Зови друзей и получай бонусы за каждого — до 3000 ₽!</p>
-                            <a href="friends-bonus.php" class="btn btn-outline-warning btn-sm mt-2">Узнать о реферальной программе</a>
+                            <p class="card-text text-muted flex-grow-1">Зови друзей и получай бонусы за каждого — до 15 000 ₽!</p>
+                            <button type="button" class="btn btn-outline-warning btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#referralModal">Узнать о реферальной программе</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Modal for Referral Program -->
+        <div class="modal fade" id="referralModal" tabindex="-1" aria-labelledby="referralModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bold" id="referralModalLabel">Как заработать до 15 000 ₽ за друга</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ol class="list-group list-group-numbered">
+                            <li class="list-group-item border-0">Пригласи друга работать в нашу компанию — расскажи ему о крутых возможностях!</li>
+                            <li class="list-group-item border-0">Напиши нам письмо, указав, кого ты пригласил. <a href="contact.php" class="text-warning fw-bold">Перейти к форме письма</a>.</li>
+                            <li class="list-group-item border-0">Твой друг должен вступить в компанию как курьер или сборщик.</li>
+                            <li class="list-group-item border-0">Другу нужно отработать не менее 100 часов доставки заказов.</li>
+                            <li class="list-group-item border-0">Готово! Ты получаешь бонус до <strong>15 000 ₽</strong> на свой счёт!</li>
+                        </ol>
+                    </div>
+                    <div class="modal-footer">
+<!--                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>-->
+                        <a href="contact.php" class="btn btn-warning fw-bold">Написать письмо</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Calculator Section -->
+    <section class="section-padding" id="calculator">
+    <?php include __DIR__ . '/includes/calculator.php'; ?>
     </section>
 </main>
 

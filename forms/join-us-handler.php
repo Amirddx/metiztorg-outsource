@@ -137,7 +137,7 @@ $message = "
 
 // Отправка через Mailgun
 $mg = Mailgun::create(MAILGUN_API_KEY);
-$domain = 'sandbox7ec456c8be9841d3b6133c7a43c9327b.mailgun.org';
+$domain = 'email.24metiztorg-samokat.ru';
 
 try {
     $mg->messages()->send($domain, [
