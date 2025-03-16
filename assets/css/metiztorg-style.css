@@ -344,24 +344,6 @@ strong {
   overflow: hidden;
 }
 
-@media screen and (min-width: 992px) {
-  .hero {
-    height: 100vh;
-  }
-
-  .custom-video,
-  .news-detail-image {
-    object-fit: cover;
-    width: 100vw;
-    height: 100vh;
-  }
-
-  .sticky-wrapper {
-    position: relative;
-    bottom: 76px;
-  }
-}
-
 .heroText {
   position: absolute;
   z-index: 9;
@@ -370,6 +352,77 @@ strong {
   transform: translate(-50%, -50%);
   width: 85%;
   text-align: center;
+}
+
+.videoWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.custom-video {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8); /* Затемнение для читаемости текста */
+}
+
+/* Desktop custom */
+@media screen and (min-width: 992px) {
+  .hero {
+    height: 100vh;
+  }
+
+  .custom-video {
+    width: 100vw;
+    height: 100vh;
+  }
+}
+
+/* Mobile custom */
+@media (max-width: 991.98px) {
+  .hero {
+    height: 70vh;
+  }
+
+  .heroText {
+    width: 90%;
+  }
+
+  .heroText h1 {
+    font-size: 2.5rem;
+  }
+
+  .heroText .lead {
+    font-size: 1rem;
+  }
+
+  .heroText .btn-lg {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+/* Small scr*/
+@media (max-width: 575.98px) {
+  .heroText h1 {
+    font-size: 2rem;
+  }
+
+  .heroText .lead {
+    font-size: 0.9rem;
+  }
 }
 
 /*---------------------------------------

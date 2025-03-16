@@ -1,7 +1,7 @@
 <!-- Калькулятор дохода -->
     <div class="container">
 
-        <h2 class="fw-bold mb-5 fs-2 text-center" data-aos="fade-up">Калькулятор дохода</h2>
+        <h2 class="text-center fw-bold mb-5" data-aos="fade-up">Калькулятор дохода</h2>
 
         <div class="row justify-content-center">
             <div class="col-12 col-md-10 col-lg-8">
@@ -11,11 +11,12 @@
                             <!-- Должность -->
                             <div class="mb-3">
                                 <label for="position" class="form-label fw-bold fs-4">Выбери свою роль</label>
-                                <p class="text-muted mb-2 fs-6">Начни зарабатывать уже сегодня!</p>
+                                <p class="text-muted mb-2 fs-6">У нас можно устроиться на любую из этих должностей!</p>
                                 <select class="form-select" id="position" name="position" required>
                                     <option value="" selected disabled>Выбери роль...</option>
                                     <option value="collector">Сборщик заказов</option>
                                     <option value="courier_bike">Вело-курьер</option>
+                                    <option value="courier_electrobike">Электровело-курьер</option>
                                     <option value="courier_car">Авто-курьер</option>
                                 </select>
                             </div>
@@ -23,7 +24,7 @@
                             <!-- Дни -->
                             <div class="mb-3">
                                 <label for="days" class="form-label fw-bold fs-4">Сколько дней в месяце ты планируешь работать?</label>
-                                <p class="text-muted mb-2 fs-6">Шаг к финансовой свободе!</p>
+
                                 <input type="range" class="form-range custom-range" id="days" name="days" min="1" max="30" value="1">
                                 <div class="d-flex justify-content-between text-muted small">
                                     <span>1</span>
@@ -35,7 +36,7 @@
                             <!-- Часы -->
                             <div class="mb-3">
                                 <label for="hours" class="form-label fw-bold fs-4">Сколько часов в день ты планируешь работать?</label>
-                                <p class="text-muted mb-2 fs-6">Время — твои деньги!</p>
+                                <p class="text-muted mb-2 fs-6">Время — деньги!</p>
                                 <input type="range" class="form-range custom-range" id="hours" name="hours" min="3" max="16" value="3">
                                 <div class="d-flex justify-content-between text-muted small">
                                     <span>3</span>
@@ -60,7 +61,7 @@
     </div>
 
 
-<!-- Стили  для ползунка (thumb) -->
+
 <style>
     .custom-range::-webkit-slider-thumb {
         -webkit-appearance: none;
@@ -85,7 +86,7 @@
     }
 </style>
 
-<!-- JavaScript  -->
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const form = document.getElementById('calculatorForm');
@@ -96,11 +97,11 @@
         const hoursOutput = document.getElementById('hoursOutput');
         const resultDiv = document.getElementById('result');
 
-        // Инициализация значений по умолчанию
+
         daysOutput.textContent = daysInput.value;
         hoursOutput.textContent = hoursInput.value;
 
-        // Обновление значений output при изменении слайдеров
+
         daysInput.addEventListener('input', function () {
             daysOutput.textContent = this.value;
             calculateTotal();
@@ -111,7 +112,7 @@
         });
         positionSelect.addEventListener('change', calculateTotal);
 
-        // Функция расчёта итоговой суммы
+
         function calculateTotal() {
             const position = positionSelect.value;
             const days = parseInt(daysInput.value);
@@ -119,13 +120,20 @@
             let hourlyRate = 0;
 
             if (position === 'collector') {
-                hourlyRate = 290; // Средняя ставка для сборщиков
+                hourlyRate = 290; // Сред. ставка сборщиков
             } else if (position === 'courier_bike') {
                 const fixedRate = 215;
                 const orderRate = 40;
                 const averageOrdersPerHour = 4;
                 hourlyRate = fixedRate + (orderRate * averageOrdersPerHour);
-            } else if (position === 'courier_car') {
+            }
+            else if (position === 'courier_electrobike') {
+                const fixedRate = 215;
+                const orderRate = 40;
+                const averageOrdersPerHour = 5;
+                hourlyRate = fixedRate + (orderRate * averageOrdersPerHour);
+            }
+            else if (position === 'courier_car') {
                 const fixedRate = 230;
                 const orderRate = 45;
                 const averageOrdersPerHour = 4;
@@ -140,7 +148,7 @@
             }
         }
 
-        // Изначальный расчёт
+
         calculateTotal();
     });
 </script>

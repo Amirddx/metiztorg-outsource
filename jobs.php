@@ -17,6 +17,7 @@ $mapData = json_encode($vacancies, JSON_UNESCAPED_UNICODE);
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/metiztorg-style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="icon" type="image/png" href="assets/fonts/icons8-аутентификация-48.png">
     <style>
         #map {
             width: 100%;
@@ -45,7 +46,7 @@ $mapData = json_encode($vacancies, JSON_UNESCAPED_UNICODE);
     <!-- Фильтры -->
     <div class="row mb-3">
         <div class="col-md-4">
-            <select class="form-select" id="filter-city">
+            <select class="form-select mt-2" id="filter-city">
                 <option value="">Выберите город</option>
                 <?php
                 $uniqueCities = array_unique(array_column($vacancies, 'City'));
@@ -56,7 +57,7 @@ $mapData = json_encode($vacancies, JSON_UNESCAPED_UNICODE);
             </select>
         </div>
         <div class="col-md-4">
-            <select class="form-select" id="filter-position">
+            <select class="form-select mt-2" id="filter-position">
                 <option value="">Выберите должность</option>
                 <?php
                 $uniquePositions = array_unique(array_column($vacancies, 'Position'));
@@ -67,7 +68,7 @@ $mapData = json_encode($vacancies, JSON_UNESCAPED_UNICODE);
             </select>
         </div>
         <div class="col-md-4">
-            <button class="btn btn-outline-secondary w-100" id="reset-filters" disabled>Сбросить фильтры</button>
+            <button class="btn btn-outline-secondary w-100 mt-2" id="reset-filters" disabled>Сбросить фильтры</button>
         </div>
     </div>
 
@@ -114,10 +115,10 @@ $mapData = json_encode($vacancies, JSON_UNESCAPED_UNICODE);
 
 <?php include __DIR__ . '/includes/footer.php'; ?>
 
-<!-- Передаём JSON с вакансиями в скрытый тег -->
+
 <script id="vacancies-data" type="application/json"><?php echo $mapData; ?></script>
 
-<!-- Подключаем API Яндекс.Карт -->
+
 <script src="https://api-maps.yandex.ru/2.1/?apikey=<?php echo YANDEX_API_KEY; ?>&lang=ru_RU"></script>
 <script src="assets/js/yandex-map.js"></script>
 <script src="assets/js/vacancy-filters.js"></script>

@@ -19,22 +19,9 @@
 </head>
 <body>
 <main>
-    <!-- Hero Section -->
-    <section class="hero position-relative text-white" id="hero">
-        <div class="heroText position-absolute top-50 start-50 translate-middle text-center z-2">
-            <h1 class="display-3 fw-bold mb-4" data-aos="zoom-in" data-aos-delay="800">Метизторг</h1>
-            <p class="lead" data-aos="fade-up" data-aos-delay="1000">Онлайн-трудоустройство за 15 минут — стань курьером или сборщиком уже сегодня!</p>
-            <a href="join-us.php" class="btn btn-warning btn-lg fw-bold mt-3" data-aos="zoom-in" data-aos-delay="1200">Присоединиться сейчас</a>
-        </div>
-        <div class="videoWrapper">
-            <video autoplay loop muted class="custom-video" poster="assets/videos/poster_for_video.png">
-                <source src="assets/videos/mixkit-banknotes-falling-on-a-dark-background-18305-full-hd.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-        <div class="overlay"></div>
-    </section>
-
+    <!-- Hero -->
+    <?php include __DIR__ . '/includes/hero.php'; ?>
+    <!-- Navbar -->
     <?php include __DIR__ . '/includes/navbar.php'; ?>
 
     <!-- Advantages Section -->
@@ -73,67 +60,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Team Carousel Section -->
-<!--    <section class="section-padding bg-dark text-white" id="team">-->
-<!--        <div class="container">-->
-<!--            <h2 class="text-center fw-bold mb-5" data-aos="fade-up">Выбери свою роль!</h2>-->
-<!--            <div id="teamCarousel" class="carousel slide" data-bs-ride="carousel">-->
-<!--                <div class="carousel-inner">-->
-<!--                    <div class="carousel-item active" data-aos="fade-up" data-aos-delay="200">-->
-<!--                        <div class="row g-0 align-items-center">-->
-<!--                            <div class="col-md-6">-->
-<!--                                <img src="assets/images/people/фотка_1.jpg" class="img-fluid rounded-start w-100" alt="Кухня Самокат">-->
-<!--                            </div>-->
-<!--                            <div class="col-md-6">-->
-<!--                                <div class="p-4 text-center text-md-start">-->
-<!--                                    <h3 class="fw-bold">Кухня Самокат</h3>-->
-<!--                                    <p class="text-secondary-white-color">Доход до 85 000 ₽ в месяц</p>-->
-<!--                                    <a href="join-us.php" class="btn btn-warning mt-3">Стать сборщиком</a>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="carousel-item" data-aos="fade-up" data-aos-delay="400">-->
-<!--                        <div class="row g-0 align-items-center">-->
-<!--                            <div class="col-md-6">-->
-<!--                                <img src="assets/images/people/фотка_3.jpg" class="img-fluid rounded-start w-100" alt="Курьер на электровелике">-->
-<!--                            </div>-->
-<!--                            <div class="col-md-6">-->
-<!--                                <div class="p-4 text-center text-md-start">-->
-<!--                                    <h3 class="fw-bold">Курьер на электровелике</h3>-->
-<!--                                    <p class="text-secondary-white-color">Чем больше заказов — тем выше доход!</p>-->
-<!--                                    <a href="join-us.php" class="btn btn-warning mt-3">Начать доставлять</a>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="carousel-item" data-aos="fade-up" data-aos-delay="600">-->
-<!--                        <div class="row g-0 align-items-center">-->
-<!--                            <div class="col-md-6">-->
-<!--                                <img src="assets/images/people/фотка_5.jpg" class="img-fluid rounded-start w-100" alt="Пеший курьер">-->
-<!--                            </div>-->
-<!--                            <div class="col-md-6">-->
-<!--                                <div class="p-4 text-center text-md-start">-->
-<!--                                    <h3 class="fw-bold">Пеший курьер</h3>-->
-<!--                                    <p class="text-secondary-white-color">Доход до 90 000 ₽ в месяц</p>-->
-<!--                                    <a href="join-us.php" class="btn btn-warning mt-3">Присоединиться</a>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <button class="carousel-control-prev" type="button" data-bs-target="#teamCarousel" data-bs-slide="prev">-->
-<!--                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>-->
-<!--                    <span class="visually-hidden">Назад</span>-->
-<!--                </button>-->
-<!--                <button class="carousel-control-next" type="button" data-bs-target="#teamCarousel" data-bs-slide="next">-->
-<!--                    <span class="carousel-control-next-icon" aria-hidden="true"></span>-->
-<!--                    <span class="visually-hidden">Вперёд</span>-->
-<!--                </button>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </section>-->
 
     <!-- Promotions Section -->
     <section class="section-padding" id="promotions">
@@ -181,7 +107,7 @@
                         <div id="referralCarousel" class="carousel slide" data-bs-ride="carousel">
                             <div class="carousel-inner">
                                 <?php
-                                $dir = 'assets/images/people/';
+                                $dir = 'assets/images/';
                                 $files = scandir($dir);
                                 $first = true;
                                 foreach ($files as $file) {

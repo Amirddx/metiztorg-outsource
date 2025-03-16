@@ -19,7 +19,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#calculator"> Калькулятор дохода</a>
+                    <a class="nav-link" href="/index.php#calculator"> Калькулятор дохода</a>
                 </li>
 
 

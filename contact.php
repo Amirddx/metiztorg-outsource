@@ -10,6 +10,7 @@
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/css/bootstrap-icons.css" rel="stylesheet">
     <link href="/assets/css/metiztorg-style.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/fonts/icons8-аутентификация-48.png">
 </head>
 <body class="d-flex flex-column min-vh-100">
 <?php include __DIR__ . '/includes/navbar.php'; ?>
