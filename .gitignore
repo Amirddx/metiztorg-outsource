@@ -1,37 +1,24 @@
-# Игнорируем конфигурации
-/config/google/*
-/config/yandex/*
-/config/mailgun/*
-
-# Игнорируем медиа и загрузки
+.osp
+.idea
+.vscode/
+node_modules/
+vendor/
+cache/
+.env
+.env.local
+.env.*.local
 /assets/videos/*
 /uploads/*
 /cache/*
 /assets/images/*
-
-# Игнорируем временные файлы и логи
+/config/google/*
+/config/yandex/*
+/config/mailgun/*
 *.log
 *.bak
 *.tmp
 *.swp
 *.~lock
-
-# Игнорируем системные файлы
 .DS_Store
 Thumbs.db
-
-# Игнорируем IDE-файлы
-.idea/
-.vscode/
-
-# Игнорируем зависимости
-node_modules/
-vendor/
-
-# Игнорируем .env-файлы
-.env
-.env.local
-.env.*.local
-
-# Не игнорируем .gitkeep
 !.gitkeep
