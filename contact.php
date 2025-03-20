@@ -28,8 +28,12 @@
                         <input type="text" name="name" id="name" class="form-control" placeholder="Иван" required>
                     </div>
                     <div class="col-lg-6">
-                        <label for="email" class="form-label">Электронная почта <span class="text-danger">*</span></label>
-                        <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="ivanov@mail.ru" required>
+                        <label for="phone" class="form-label">Телефон <span class="text-danger">*</span></label>
+                        <input type="tel" name="phone" id="phone" class="form-control" placeholder="+7 (999) 123-45-67" required>
+                    </div>
+                    <div class="col-lg-12">
+                        <label for="email" class="form-label">Электронная почта</label>
+                        <input type="email" name="email" id="email" pattern="[^ @]*@[^ @]*" class="form-control" placeholder="ivanov@mail.ru">
                     </div>
                     <div class="col-12">
                         <label for="message" class="form-label">Как мы можем помочь?</label>

@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const documentsContainer = document.getElementById("documents");
     const noticesContainer = document.getElementById("notices");
 
-    // Конфигурация документов для каждого гражданства
     const docConfig = {
         "РФ (Россия)": [
             { name: "passport_rf", label: "Паспорт", required: true },
@@ -106,110 +105,133 @@ document.addEventListener("DOMContentLoaded", function () {
         ]
     };
 
-    // Маска для телефона с помощью IMask
     const phoneInput = document.querySelector(".phone-mask");
     if (phoneInput) {
         if (typeof IMask === "undefined") {
-            console.error("IMask не загружен. Проверьте подключение CDN.");
+            console.error("IMask не загружен.");
         } else {
-            IMask(phoneInput, {
-                mask: "+{7} (000) 000-00-00",
-                lazy: false,
-                placeholderChar: "_"
-            });
+            IMask(phoneInput, { mask: "+{7} (000) 000-00-00", lazy: false, placeholderChar: "_" });
         }
     }
 
-    // Функция обновления полей документов
+
     function updateDocuments() {
         const selectedCitizenship = citizenshipSelect.value;
-        documentsContainer.innerHTML = ""; // Очищаем контейнер
+        documentsContainer.innerHTML = "";
         noticesContainer.style.display = "none";
 
         if (selectedCitizenship && docConfig[selectedCitizenship]) {
             docConfig[selectedCitizenship].forEach(doc => {
                 const div = document.createElement("div");
-                div.className = "col-md-12 mt-2";
+                div.className = "col-md-12 mt-2 document-item";
                 div.innerHTML = `
-                    <label class="form-label">${doc.label} ${doc.required ? '<span class="text-danger">*</span>' : ''}</label>
-                    <input type="file" name="${doc.name}" class="form-control" accept=".jpg,.jpeg,.png,.pdf" ${doc.required ? 'required' : ''}>
-                `;
+                <label class="form-label">${doc.label} ${doc.required ? '<span class="text-danger">*</span>' : ''}</label>
+                <div class="input-group">
+                    <input type="file" name="${doc.name}" class="form-control file-input" accept=".jpg,.jpeg,.png,.pdf" ${doc.required ? 'required' : ''}>
+                    <button class="btn btn-outline-danger clear-file" type="button" style="display: none;">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+                <div class="preview mt-2" style="display: none;"></div>
+            `;
                 documentsContainer.appendChild(div);
             });
 
             noticesContainer.style.display = "block";
             const regionNotice = noticesContainer.querySelector('[data-notice="region"]');
-            const regionRequired = [
-                "РФ (Россия)", "ЕАЭС (Беларусь)", "ЕАЭС (Армения, Киргизия, Казахстан)",
-                "ВНЖ", "РВП", "СНГ (Азербайджан, Молдова, Таджикистан, Узбекистан)",
-                "Студент", "Лицо без гражданства", "Беженец"
-            ];
+            const regionRequired = ["РФ (Россия)", "ЕАЭС (Беларусь)", "ЕАЭС (Армения, Киргизия, Казахстан)", "ВНЖ", "РВП", "СНГ (Азербайджан, Молдова, Таджикистан, Узбекистан)", "Студент", "Лицо без гражданства", "Беженец"];
             regionNotice.style.display = regionRequired.includes(selectedCitizenship) ? "block" : "none";
+
+            addFileListeners();
         }
     }
 
-    // Обработка отправки формы
-    form.addEventListener("submit", function (e) {
+    function addFileListeners() {
+        const MAX_FILE_SIZE = 10 * 1024 * 1024;
+
+        documentsContainer.querySelectorAll(".file-input").forEach(input => {
+            const clearButton = input.closest(".input-group").querySelector(".clear-file");
+            const preview = input.closest(".document-item").querySelector(".preview");
+
+            input.addEventListener("change", function () {
+                const file = this.files[0];
+                preview.innerHTML = "";
+                preview.style.display = "none";
+                clearButton.style.display = "none";
+
+                if (file) {
+
+                    if (file.size > MAX_FILE_SIZE) {
+                        alert(`Загруженный файл слишком большой! Максимальный размер фото: 10 МБ.`);
+                        this.value = "";
+                        return;
+                    }
+
+                    clearButton.style.display = "block";
+
+                    if (file.type.startsWith("image/")) {
+                        const img = document.createElement("img");
+                        img.src = URL.createObjectURL(file);
+                        img.style.maxWidth = "200px";
+                        img.className = "img-thumbnail";
+                        preview.appendChild(img);
+                    } else if (file.type === "application/pdf") {
+                        preview.innerHTML = `<span>PDF: ${file.name}</span>`;
+                    }
+                    preview.style.display = "block";
+                }
+            });
+
+            clearButton.addEventListener("click", () => {
+                input.value = "";
+                preview.innerHTML = "";
+                preview.style.display = "none";
+                clearButton.style.display = "none";
+            });
+        });
+    }
+
+//*
+    form.addEventListener("submit", async function (e) {
         e.preventDefault();
 
         const consent = form.querySelector('[name="consent"]').checked;
         const recaptchaResponse = grecaptcha.getResponse();
         const submitButton = form.querySelector('button[type="submit"]');
+        const phoneValue = form.querySelector('[name="phone"]').value;
         const originalButtonText = submitButton.textContent;
-        const phoneInput = form.querySelector('[name="phone"]');
-        const phoneValue = phoneInput.value;
 
-        // Минимальная проверка на клиенте
-        if (!consent) {
-            alert("Необходимо согласиться на обработку персональных данных");
-            return;
-        }
-        if (!recaptchaResponse) {
-            alert("Пройдите проверку reCAPTCHA");
-            return;
-        }
-        // Проверяем, что телефон заполнен реальными цифрами, а не только маской
-        const phoneDigitsOnly = phoneValue.replace(/[^\d]/g, ""); // Убираем всё, кроме цифр
-        if (!phoneDigitsOnly || phoneDigitsOnly.length < 11) { // 11 цифр для +7 и 10-значного номера
-            alert("Пожалуйста, введите полный номер телефона в формате +7 (XXX) XXX-XX-XX");
-            return;
-        }
-        if (!/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/.test(phoneValue)) {
-            alert("Неверный формат телефона. Используйте +7 (XXX) XXX-XX-XX");
-            return;
+        if (!consent) return alert("Необходимо согласиться на обработку персональных данных");
+        if (!recaptchaResponse) return alert("Пройдите проверку reCAPTCHA");
+        const phoneDigitsOnly = phoneValue.replace(/[^\d]/g, "");
+        if (phoneDigitsOnly.length < 11 || !/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/.test(phoneValue)) {
+            return alert("Введите полный номер телефона в формате +7 (XXX) XXX-XX-XX");
         }
 
-        // Показываем индикатор загрузки
         submitButton.disabled = true;
         submitButton.textContent = "Отправка...";
 
-        const formData = new FormData(form);
-        fetch(form.action, {
-            method: "POST",
-            body: formData
-        })
-            .then(response => {
-                if (!response.ok) throw new Error("Сетевая ошибка");
-                return response.json();
-            })
-            .then(data => {
-                if (data.errors) {
-                    alert("Ошибки:\n" + data.errors.join("\n"));
-                } else if (data.redirect) {
-                    window.location.href = data.redirect;
-                }
-            })
-            .catch(error => {
-                alert("Ошибка: " + error.message);
-                console.error("Ошибка отправки:", error);
-            })
-            .finally(() => {
-                submitButton.disabled = false;
-                submitButton.textContent = originalButtonText;
-            });
+        try {
+            const formData = new FormData(form);
+            const response = await fetch(form.action, { method: "POST", body: formData });
+            if (!response.ok) throw new Error("Сетевая ошибка");
+            const data = await response.json();
+
+            if (data.errors) {
+                alert("Ошибки:\n" + data.errors.join("\n"));
+            } else if (data.redirect) {
+                window.location.href = data.redirect;
+            }
+        } catch (error) {
+            console.error("Ошибка отправки:", error);
+            alert("Ошибка: " + error.message);
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
+        }
     });
 
-    // Инициализация и слушатель изменения гражданства
+
     updateDocuments();
     citizenshipSelect.addEventListener("change", updateDocuments);
 });

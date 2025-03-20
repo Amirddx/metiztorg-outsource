@@ -1,6 +1,6 @@
 <?php
 
-// Проверяем, объявлена ли уже константа перед ее созданием
+
 if (!defined('GOOGLE_SPREADSHEET_ID')) {
     define('GOOGLE_SPREADSHEET_ID', '1M6WJwYjPCAPJhpovpbS-szkbAmBMNeR0AaOdE1eNAyE'); // ID Google Таблицы
 }
@@ -9,7 +9,7 @@ if (!defined('GOOGLE_KEY_PATH')) {
     define('GOOGLE_KEY_PATH', __DIR__ . '/../config/google/google-key.json'); // Путь к API ключу
 }
 
-// Подключаем конфигурацию Yandex API, если она еще не была загружена
+// Yandex API
 $yandexConfigPath = __DIR__ . '/../config/yandex/yandex-key.php';
 if (file_exists($yandexConfigPath)) {
     $yandexConfig = require $yandexConfigPath;
@@ -18,15 +18,18 @@ if (file_exists($yandexConfigPath)) {
     }
 }
 
-// Подключаем конфигурацию Mailgun API, если она еще не была загружена
+// Mailgun API
 $mailgunConfigPath = __DIR__ . '/../config/mailgun/mailgun-key.php';
 if (file_exists($mailgunConfigPath)) {
     $mailgunConfig = require $mailgunConfigPath;
     if (!defined('MAILGUN_API_KEY')) {
         define('MAILGUN_API_KEY', $mailgunConfig['MAILGUN_API_KEY']);
     }
+    if (!defined('MAILGUN_DOMAIN')) {
+        define('MAILGUN_DOMAIN', $mailgunConfig['MAILGUN_DOMAIN']);
+    }
 }
-// Подключаем конфигурацию reCAPTCHA
+//  reCAPTCHA
 $recaptchaConfigPath = __DIR__ . '/../config/google/recaptcha-keys.php';
 if (file_exists($recaptchaConfigPath)) {
     $recaptchaConfig = require $recaptchaConfigPath;
