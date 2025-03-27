@@ -13,4 +13,3 @@
         <a href="/join-us.php" class="btn btn-warning btn-lg fw-bold" data-aos="zoom-in" data-aos-delay="1200">Присоединиться сейчас</a>
     </div>
 </section>
-

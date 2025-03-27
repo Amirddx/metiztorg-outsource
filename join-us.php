@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Стань частью команды Самоката!</title>
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/metiztorg-style.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css?v=2">
+    <link rel="stylesheet" href="/assets/css/metiztorg-style.css?v=2">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="icon" type="image/png" href="assets/fonts/icons8-аутентификация-48.png">
 </head>
@@ -199,7 +199,7 @@
                                 <input type="checkbox" class="form-check-input" id="consent" name="consent" required>
                                 <label class="form-check-label" for="consent">
                                     Я подтверждаю свое согласие на обработку персональных данных в соответствии с <a
-                                            class="text-dark text-decoration-underline" href="/privacy-policy"
+                                            class="text-dark text-decoration-underline" href="/privacy-policy.php"
                                             target="_blank">Политикой конфиденциальности</a>.
                                 </label>
                             </div>
@@ -222,7 +222,7 @@
 
 <script src="https://www.google.com/recaptcha/api.js?hl=ru" async defer></script>
 <script src="https://unpkg.com/imask"></script>
-<script src="/assets/js/join-us-form.js"></script>
+<script src="/assets/js/join-us-form.js?v=2"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

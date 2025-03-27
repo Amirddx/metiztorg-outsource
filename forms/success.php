@@ -17,9 +17,9 @@
 <main class="container my-5 flex-grow-1">
     <div class="row justify-content-center">
         <div class="col-lg-8 text-center">
-            <h2 class="mb-4">Заявка успешно отправлена!</h2>
+            <h2 class="mb-4">Успешно отправлено!</h2>
             <p class="text-muted">Спасибо за вашу заявку. Мы свяжемся с вами в ближайшее время.</p>
-            <a href="/join-us.php" class="btn btn-warning mt-3">Вернуться к форме</a>
+            <a href="/main" class="btn btn-warning mt-3">На главную страницу</a>
         </div>
     </div>
 </main>

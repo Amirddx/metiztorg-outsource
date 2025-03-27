@@ -47,6 +47,9 @@
                 <p class="text-muted mb-1">© Метизторг 2019-2025</p>
                 <p class="text-muted mb-3">Все права защищены</p>
                 <a href="/contact.php" class="btn btn-outline-warning fw-bold px-4">Обратная связь</a>
+                <a href="/privacy-policy.php" class="btn btn-link text-muted p-0 mt-2 text-decoration-underline">
+                    Политика конфиденциальности
+                </a>
             </div>
         </div>
     </div>

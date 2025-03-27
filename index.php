@@ -11,11 +11,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;700;900&display=swap"
           rel="stylesheet">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/bootstrap.min.css?v=2" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-    <link href="assets/css/magnific-popup.css" rel="stylesheet">
-    <link href="assets/css/aos.css" rel="stylesheet">
-    <link href="assets/css/metiztorg-style.css" rel="stylesheet">
+    <link href="assets/css/magnific-popup.css?v=2" rel="stylesheet">
+    <link href="assets/css/aos.css?v=2" rel="stylesheet">
+    <link href="assets/css/metiztorg-style.css?v=2" rel="stylesheet">
 
     <link rel="icon" type="image/png" href="assets/fonts/icons8-аутентификация-48.png">
 </head>
@@ -48,7 +48,7 @@
                             <h5 class="card-title fw-bold">Выбор вакансий</h5>
                             <p class="card-text text-muted">Смотри открытые вакансии на карте и выбирай удобный
                                 адрес!</p>
-                            <a href="jobs.php" class="btn btn-outline-warning btn-sm mt-2">Посмотреть карту</a>
+                            <a href="/jobs" class="btn btn-outline-warning btn-sm mt-2">Посмотреть карту</a>
                         </div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                             <h5 class="card-title fw-bold">Бонус за скорость</h5>
                             <p class="card-text text-muted flex-grow-1">Оформись онлайн до 1 апреля и получи +500 ₽ к
                                 первой выплате!</p>
-                            <a href="join-us.php" class="btn btn-outline-warning btn-sm mt-2">Оформиться сейчас</a>
+                            <a href="/join-us" class="btn btn-outline-warning btn-sm mt-2">Оформиться сейчас</a>
                         </div>
                     </div>
                 </div>
@@ -184,7 +184,7 @@
                     </div>
                     <div class="modal-footer">
                         <!--                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>-->
-                        <a href="contact.php" class="btn btn-warning fw-bold">Написать письмо</a>
+                        <a href="/contact" class="btn btn-warning fw-bold">Написать письмо</a>
                     </div>
                 </div>
             </div>
@@ -282,13 +282,13 @@
 
 <?php include __DIR__ . '/includes/footer.php'; ?>
 
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/bootstrap.bundle.min.js"></script>
+<script src="assets/js/jquery.min.js?v=2"></script>
+<script src="assets/js/bootstrap.bundle.min.js?v=2"></script>
 <script src="assets/js/jquery.sticky.js"></script>
 <script src="assets/js/aos.js"></script>
-<script src="assets/js/jquery.magnific-popup.min.js"></script>
-<script src="assets/js/magnific-popup-options.js"></script>
-<script src="assets/js/scrollspy.min.js"></script>
+<script src="assets/js/jquery.magnific-popup.min.js?v=2"></script>
+<script src="assets/js/magnific-popup-options.js?v=2"></script>
+<script src="assets/js/scrollspy.min.js?v=2"></script>
 <script src="assets/js/custom.js"></script>
 </body>
 </html>

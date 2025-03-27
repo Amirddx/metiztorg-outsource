@@ -1,32 +1,56 @@
-
-# Enable Rewrite Engine
+# Вкл. Rewrite Engine
 RewriteEngine On
+RewriteBase /
 
-# Redirect to index.php if a file or directory does not exist
+# ЧПУ
+RewriteRule ^jobs/?$ jobs.php [L]
+RewriteRule ^main/?$ index.php [L]
+RewriteRule ^join-us/?$ join-us.php [L]
+RewriteRule ^contact/?$ contact.php [L]
+
+
+# если файл или папка не существует направляем на index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [L]
 
-# Add MIME types for CSS and JavaScript
+# MIME
 AddType text/css .css
 AddType application/javascript .js
 
-# Enable CORS for resources
+# CORS
 <IfModule mod_headers.c>
     Header set Access-Control-Allow-Origin "*"
 </IfModule>
 
-# Cache static files for better performance
+# Кэширование
 <IfModule mod_expires.c>
     ExpiresActive On
-    ExpiresByType text/css "access plus 1 month"
-    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/css "access plus 1 day"
+    ExpiresByType application/javascript "access plus 1 day"
     ExpiresByType image/jpeg "access plus 1 year"
     ExpiresByType image/png "access plus 1 year"
     ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+    ExpiresByType font/woff "access plus 1 year"
+    ExpiresByType font/ttf "access plus 1 year"
 </IfModule>
 
+
+<FilesMatch "\.(htaccess|htpasswd|env|ini|phar|lock|json|yml|yaml|log|md|git)$">
+    Require all denied
+</FilesMatch>
+
+
 <Files "google-key.json">
-    Order Deny,Allow
-    Deny from all
+    Require all denied
 </Files>
+
+# Защ.прямого доступа к PHP в includes, forms, api, vendor
+<FilesMatch "(includes|forms|api|vendor)/.*\.php$">
+    Require all denied
+</FilesMatch>
+
+# Откл листинг содержимого директорий
+Options -Indexes

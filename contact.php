@@ -21,7 +21,7 @@
             <h2 class="mb-4 text-center fw-bold" data-aos="fade-up">Свяжитесь с нами</h2>
             <p class="text-center text-muted mb-5" data-aos="fade-up" data-aos-delay="200">Мы всегда на связи и готовы помочь!</p>
 
-            <form action="#" method="post" class="shadow p-4 bg-white rounded-3" role="form" data-aos="fade-up" data-aos-delay="400">
+            <form action="/forms/contact-handler.php" method="post" class="shadow p-4 bg-white rounded-3" role="form" data-aos="fade-up" data-aos-delay="400">
                 <div class="row g-3">
                     <div class="col-lg-6">
                         <label for="name" class="form-label">Имя <span class="text-danger">*</span></label>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-lg-6">
                         <label for="phone" class="form-label">Телефон <span class="text-danger">*</span></label>
-                        <input type="tel" name="phone" id="phone" class="form-control" placeholder="+7 (999) 123-45-67" required>
+                        <input type="tel" name="phone" id="phone" class="form-control phone-mask" placeholder="+7 (999) 123-45-67" required>
                     </div>
                     <div class="col-lg-12">
                         <label for="email" class="form-label">Электронная почта</label>
@@ -54,7 +54,7 @@
 <script src="/assets/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/js/jquery.sticky.js"></script>
 <script src="/assets/js/aos.js"></script>
-<script src="/assets/js/scrollspy.min.js"></script>
+<script src="/assets/js/contact-form.js"></script>
 <script src="/assets/js/custom.js"></script>
 </body>
 </html>
