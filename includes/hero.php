@@ -10,6 +10,6 @@
     <div class="heroText text-center">
         <h1 class="display-3 fw-bold mb-4" data-aos="zoom-in" data-aos-delay="800">Метизторг</h1>
         <p class="lead mb-4" data-aos="fade-up" data-aos-delay="1000">Онлайн-трудоустройство за 15 минут — стань курьером или сборщиком уже сегодня!</p>
-        <a href="/join-us.php" class="btn btn-warning btn-lg fw-bold" data-aos="zoom-in" data-aos-delay="1200">Присоединиться сейчас</a>
+        <a href="/join-us" class="btn btn-warning btn-lg fw-bold" data-aos="zoom-in" data-aos-delay="1200">Присоединиться сейчас</a>
     </div>
 </section>

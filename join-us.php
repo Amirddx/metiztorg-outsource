@@ -56,7 +56,7 @@
             </div>
 
             <div class="mt-4">
-                <a href="#joinUsForm" class="btn btn-warning btn-lg fw-bold">Начать прямо сейчас!</a>
+                <a href="/join-us#joinUsForm" class="btn btn-warning btn-lg fw-bold">Начать прямо сейчас!</a>
                 <p class="text-muted mt-3">После заполнения анкеты жди звонка от нашего менеджера — твоя первая смена
                     уже на подходе!</p>
             </div>
@@ -104,7 +104,7 @@
                              data-bs-parent="#hiringProcess">
                             <div class="accordion-body text-muted">
                                 Наш менеджер позвонит, чтобы согласовать удобное время твоей первой смены и адрес —
-                                выбирай из <a href="/jobs.php" class="text-decoration-underline text-dark">открытых
+                                выбирай из <a href="/jobs" class="text-decoration-underline text-dark">открытых
                                     вакансий на карте</a>!
                             </div>
                         </div>

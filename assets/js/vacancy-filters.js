@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let visibleCount = 7;
 
-    // Применение фильтров
+
     function applyFilters() {
         const selectedCity = cityFilter.value.trim().toLowerCase();
         const selectedPosition = positionFilter.value.trim().toLowerCase();
@@ -22,14 +22,14 @@ document.addEventListener("DOMContentLoaded", function () {
         updateResetButtonState();
     }
 
-    // Обновление списка вакансий
+
     function updateVacancyList(filteredVacancies) {
         vacancies.forEach(vacancy => vacancy.style.display = "none");
         filteredVacancies.slice(0, visibleCount).forEach(vacancy => vacancy.style.display = "block");
         showMoreButton.style.display = filteredVacancies.length > visibleCount ? "block" : "none";
     }
 
-    // Обновление состояния кнопки сброса
+
     function updateResetButtonState() {
         const cityValue = cityFilter.value;
         const positionValue = positionFilter.value;
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const isPositionSelected = positionValue !== "" && positionValue !== null;
         const shouldEnable = isCitySelected || isPositionSelected;
 
-        // Для отладки: выводим значения в консоль
+
         console.log("City:", cityValue, "Position:", positionValue, "Enable Reset:", shouldEnable);
 
         resetButton.disabled = !shouldEnable;

@@ -7,6 +7,7 @@ RewriteRule ^jobs/?$ jobs.php [L]
 RewriteRule ^main/?$ index.php [L]
 RewriteRule ^join-us/?$ join-us.php [L]
 RewriteRule ^contact/?$ contact.php [L]
+RewriteRule ^privacy-policy/?$ privacy-policy.php [L]
 
 
 # если файл или папка не существует направляем на index.php
